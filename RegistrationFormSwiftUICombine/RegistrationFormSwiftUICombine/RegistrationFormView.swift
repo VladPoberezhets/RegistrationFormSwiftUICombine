@@ -8,11 +8,15 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RegistrationFormView: View {
     @State var userName:String = ""
+    var errorUserName:String = ""
     @State var email:String = ""
+    var errorEmail:String = ""
     @State var password:String = ""
+    var errorPassword:String = ""
     @State var confirmPassword:String = ""
+    var errorConfirmPassword:String = ""
     private var heightTextFiled:CGFloat = 30
     private var errorPadding:CGFloat = 1.3
     private var buttonHeight:CGFloat = 13
@@ -32,7 +36,7 @@ struct ContentView: View {
                             .foregroundColor(Color.green)
                         TextField("Enter your user name", text: self.$userName).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("Error").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/1.3)
+                        Text("\(errorUserName)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/1.3)
                     }.padding([.leading,.trailing,.top])
                     
                     VStack(alignment:.leading){
@@ -41,7 +45,7 @@ struct ContentView: View {
                             .foregroundColor(Color.green)
                         TextField("Enter your email", text: self.$email).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("Error").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(errorEmail)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
                     }.padding([.leading,.trailing])
                     
                     VStack(alignment:.leading){
@@ -50,7 +54,7 @@ struct ContentView: View {
                             .foregroundColor(Color.green)
                         SecureField("Enter your password", text: self.$password).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("Error").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(errorPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
                     }.padding([.leading,.trailing])
                     
                     VStack(alignment:.leading){
@@ -59,7 +63,7 @@ struct ContentView: View {
                             .foregroundColor(Color.green)
                         SecureField("Confirm your password", text: self.$confirmPassword).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("Error").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(errorConfirmPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
                     }.padding([.leading,.trailing])
                     
                     Button(action: {
@@ -74,6 +78,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RegistrationFormView()
     }
 }

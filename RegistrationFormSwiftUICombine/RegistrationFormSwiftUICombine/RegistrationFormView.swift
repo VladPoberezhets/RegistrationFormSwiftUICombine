@@ -36,7 +36,7 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         TextField("Enter your user name", text: self.$userName).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(errorUserName)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/1.3)
+                        Text("\(self.errorUserName)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/1.3)
                     }.padding([.leading,.trailing,.top])
                     
                     VStack(alignment:.leading){
@@ -45,7 +45,7 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         TextField("Enter your email", text: self.$email).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(errorEmail)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(self.errorEmail)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
                     }.padding([.leading,.trailing])
                     
                     VStack(alignment:.leading){
@@ -54,7 +54,7 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         SecureField("Enter your password", text: self.$password).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(errorPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(self.errorPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
                     }.padding([.leading,.trailing])
                     
                     VStack(alignment:.leading){
@@ -63,7 +63,7 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         SecureField("Confirm your password", text: self.$confirmPassword).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(errorConfirmPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(self.errorConfirmPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
                     }.padding([.leading,.trailing])
                     
                     Button(action: {

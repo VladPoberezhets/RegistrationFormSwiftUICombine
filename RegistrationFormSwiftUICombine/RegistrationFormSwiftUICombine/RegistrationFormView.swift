@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct RegistrationFormView: View {
 
@@ -18,9 +19,12 @@ struct RegistrationFormView: View {
     private var buttonWidth:CGFloat = 29
     private var paddingButton:CGFloat = 30
     
+    @State private var keyboardHeight: CGFloat = 0
+    
     var body: some View {
         GeometryReader{geometry in
             NavigationView{
+                ScrollView{
                 VStack{
                     VStack(alignment:.leading){
                         Text("Organisation name").font(.callout).foregroundColor(Color.gray).padding(.leading)
@@ -65,11 +69,15 @@ struct RegistrationFormView: View {
                     
                     Button(action: {
                         print("sign up")
-                    }, label: {Text("Sign up").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(self.settings.enableButton ?Color(.gray):Color(.green)).cornerRadius(geometry.size.width/self.buttonWidth).padding(.top,self.paddingButton).disabled(self.settings.enableButton)
+                    }, label: {Text("Sign up").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(self.settings.enableButton ?Color(.green):Color(.gray)).cornerRadius(geometry.size.width/self.buttonWidth).padding(.top,self.paddingButton).disabled(!self.settings.enableButton)
                     Spacer()
                 }.navigationBarTitle("Registration")
+                 
             }
-        }
+        }   .padding(.bottom, self.keyboardHeight)
+                     // 3.
+                     .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
+    }
     }
 }
 

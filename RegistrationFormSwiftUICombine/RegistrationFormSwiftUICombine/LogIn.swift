@@ -15,7 +15,6 @@ struct LogIn: View {
     private var errorPadding:CGFloat = 1.3
     private var buttonHeight:CGFloat = 13
     private var buttonWidth:CGFloat = 29
-    private var paddingButton:CGFloat = 30
     
     var body: some View {
         GeometryReader{geometry in
@@ -29,17 +28,19 @@ struct LogIn: View {
                     Text("User name or email").font(.subheadline)
                     .foregroundColor(Color.green)
                     TextField("Enter user name or email", text: self.$name).frame(height:self.heightTextFiled)
+                    Divider()
                 }.padding([.leading, .trailing, .bottom]).padding(.top,100)
                 
                 VStack(alignment:.leading){
                     Text("Password").font(.subheadline)
                     .foregroundColor(Color.green)
                     SecureField("Enter password", text: self.$name).frame(height:self.heightTextFiled)
+                    Divider()
                 }.padding([.leading, .trailing, .bottom])
                 
                 Button(action: {
                     print("sign in")
-                }, label: {Text("Log in").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(Color(.green)).cornerRadius(geometry.size.width/self.buttonWidth).padding(.top,self.paddingButton)
+                }, label: {Text("Log in").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(Color(.green)).cornerRadius(geometry.size.width/self.buttonWidth)
                 Spacer()
                 .navigationBarTitle("Log in")
             }

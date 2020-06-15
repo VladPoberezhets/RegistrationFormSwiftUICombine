@@ -11,7 +11,7 @@ import Combine
 
 struct RegistrationFormView: View {
 
-    @ObservedObject var settings = Settings()
+    @ObservedObject var settings = SettingsRegistration()
     
     private var heightTextFiled:CGFloat = 30
     private var errorPadding:CGFloat = 1.3
@@ -37,7 +37,7 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         TextField("Enter your user name", text: self.$settings.userName).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(self.settings.errorUserName)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/1.3)
+                        Text("\(self.settings.errorUserName)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
                     }.padding([.leading,.trailing,.top])
                     
                     VStack(alignment:.leading){
@@ -68,8 +68,9 @@ struct RegistrationFormView: View {
                     }.padding([.leading,.trailing])
                     
                     Button(action: {
-                        print("sign up")
-                    }, label: {Text("Sign up").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(self.settings.enableButton ?Color(.green):Color(.gray)).cornerRadius(geometry.size.width/self.buttonWidth).padding(.top,self.paddingButton).disabled(!self.settings.enableButton)
+                        self.settings.userDefaults.set(self.settings.email, forKey: "Email")
+                        self.settings.userDefaults.set(self.settings.password, forKey: "Password")
+                    }, label: {Text("Sign up").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(self.settings.enableButton ?Color(.green):Color(.gray)).cornerRadius(geometry.size.width/self.buttonWidth).padding(.top,self.paddingButton).disabled(self.settings.enableButton)
                     Spacer()
                 }.navigationBarTitle("Registration")
                  

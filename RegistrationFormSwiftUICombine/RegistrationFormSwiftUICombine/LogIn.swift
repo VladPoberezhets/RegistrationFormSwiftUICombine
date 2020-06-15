@@ -44,15 +44,16 @@ struct LogIn: View {
                     }.padding([.leading, .trailing,])
                     Text("\(self.showError ?self.error:"")").font(.footnote).foregroundColor(Color.red).padding([.bottom])
                     Button(action: {
+                        if self.email != (UserDefaults.standard.object(forKey: "Email")) as! String && self.password as AnyObject !== (UserDefaults.standard.object(forKey: "Password")) as AnyObject{
+                                                 self.showError = true
+                                             }else{
+                        }
                         print("sign in")
                     }, label: {Text("Log in").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(Color(.green)).cornerRadius(geometry.size.width/self.buttonWidth)
                     
                     Button(action: {
-                        if self.email != (UserDefaults.standard.object(forKey: "Email")) as! String && self.password as AnyObject !== (UserDefaults.standard.object(forKey: "Password")) as AnyObject{
-                            self.showError = true
-                        }else{
                         self.showRegistration = true
-                        }
+                        
                     }, label: {Text("Don't have account?")
                         .font(.subheadline)}).padding(.top).sheet(isPresented: self.$showRegistration) {
                             RegistrationFormView()

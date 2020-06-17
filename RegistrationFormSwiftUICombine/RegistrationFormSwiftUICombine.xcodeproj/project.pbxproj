@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F50107502497AEE800D7B377 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F501074F2497AEE800D7B377 /* LoadingView.swift */; };
 		F58862042494D0BF007AEAC6 /* KeyboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58862032494D0BF007AEAC6 /* KeyboardSettings.swift */; };
 		F58862062494D3EA007AEAC6 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58862052494D3EA007AEAC6 /* LogIn.swift */; };
 		F5F5947E249272BB00B05445 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F5947D249272BB00B05445 /* AppDelegate.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F501074F2497AEE800D7B377 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F58862032494D0BF007AEAC6 /* KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettings.swift; sourceTree = "<group>"; };
 		F58862052494D3EA007AEAC6 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		F5F5947A249272BB00B05445 /* RegistrationFormSwiftUICombine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegistrationFormSwiftUICombine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 				F5F59488249272BC00B05445 /* LaunchScreen.storyboard */,
 				F5F5948B249272BC00B05445 /* Info.plist */,
 				F5F59485249272BC00B05445 /* Preview Content */,
+				F501074F2497AEE800D7B377 /* LoadingView.swift */,
 			);
 			path = RegistrationFormSwiftUICombine;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				F5F59480249272BB00B05445 /* SceneDelegate.swift in Sources */,
 				F5F5949224927F1200B05445 /* SettingsRegistration.swift in Sources */,
 				F58862042494D0BF007AEAC6 /* KeyboardSettings.swift in Sources */,
+				F50107502497AEE800D7B377 /* LoadingView.swift in Sources */,
 				F5F59482249272BB00B05445 /* RegistrationFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

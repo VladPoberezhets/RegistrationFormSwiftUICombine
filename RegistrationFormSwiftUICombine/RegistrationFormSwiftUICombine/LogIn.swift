@@ -11,7 +11,7 @@ import SwiftUI
 struct LogIn: View {
     @State private var email:String = ""
     @State private var password:String = ""
-     private var error:String = "This email or password is incorect"
+    private var error:String = "This email or password is incorect"
     @State private var showError = false
     
     private var heightTextFiled:CGFloat = 30
@@ -20,6 +20,7 @@ struct LogIn: View {
     private var buttonWidth:CGFloat = 29
     
     @State private var showRegistration = false
+    @State private var showLoadingView = false
     
     var body: some View {
         GeometryReader{geometry in
@@ -42,14 +43,19 @@ struct LogIn: View {
                         SecureField("Enter password", text: self.$password).frame(height:self.heightTextFiled)
                         Divider()
                     }.padding([.leading, .trailing,])
+                    
                     Text("\(self.showError ?self.error:"")").font(.footnote).foregroundColor(Color.red).padding([.bottom])
+                    
                     Button(action: {
                         if self.email != (UserDefaults.standard.object(forKey: "Email")) as! String && self.password as AnyObject !== (UserDefaults.standard.object(forKey: "Password")) as AnyObject{
-                                                 self.showError = true
-                                             }else{
+                            self.showError = true
+                        }else{
+                            self.showLoadingView = true
                         }
                         print("sign in")
                     }, label: {Text("Log in").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(Color(.green)).cornerRadius(geometry.size.width/self.buttonWidth)
+                    
+                    NavigationLink(destination: LoadingView(), isActive: self.$showLoadingView, label: {Text("")})
                     
                     Button(action: {
                         self.showRegistration = true

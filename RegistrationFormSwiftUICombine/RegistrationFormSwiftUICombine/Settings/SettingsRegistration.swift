@@ -9,7 +9,10 @@
 import Foundation
 import Combine
 
-class Settings:ObservableObject{
+class SettingsRegistration:ObservableObject{
+    
+    var userDefaults = UserDefaults.standard
+    
     @Published var userName:String = ""
     var errorUserName:String = ""
     @Published var email:String = ""

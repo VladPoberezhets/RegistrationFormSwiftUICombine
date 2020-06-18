@@ -10,6 +10,8 @@ import SwiftUI
 import Combine
 
 struct RegistrationFormView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
 
     @ObservedObject var settings = SettingsRegistration()
     
@@ -18,6 +20,11 @@ struct RegistrationFormView: View {
     private var buttonHeight:CGFloat = 13
     private var buttonWidth:CGFloat = 29
     private var paddingButton:CGFloat = 30
+    
+    private var paddingUserNameError:CGFloat = 65
+    private var paddingEmailError:CGFloat = 70
+    private var paddingPasswordError:CGFloat = 135
+    private var paddingConfirmPasswordError:CGFloat = 150
     
     @State private var keyboardHeight: CGFloat = 0
     
@@ -37,7 +44,7 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         TextField("Enter your user name", text: self.$settings.userName).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(self.settings.errorUserName)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(self.settings.errorUserName)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding-self.paddingUserNameError)
                     }.padding([.leading,.trailing,.top])
                     
                     VStack(alignment:.leading){
@@ -46,7 +53,7 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         TextField("Enter your email", text: self.$settings.email).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(self.settings.errorEmail)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(self.settings.errorEmail)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding-self.paddingEmailError)
                     }.padding([.leading,.trailing])
                     
                     VStack(alignment:.leading){
@@ -55,7 +62,7 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         SecureField("Enter your password", text: self.$settings.password).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(self.settings.errorPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(self.settings.errorPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding-self.paddingPasswordError)
                     }.padding([.leading,.trailing])
                     
                     VStack(alignment:.leading){
@@ -64,13 +71,14 @@ struct RegistrationFormView: View {
                             .foregroundColor(Color.green)
                         SecureField("Confirm your password", text: self.$settings.confirmPassword).frame(height:self.heightTextFiled)
                         Divider()
-                        Text("\(self.settings.errorConfirmPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding)
+                        Text("\(self.settings.errorConfirmPassword)").font(.footnote).foregroundColor(Color.red).padding(.leading,geometry.size.width/self.errorPadding-self.paddingConfirmPasswordError)
                     }.padding([.leading,.trailing])
                     
                     Button(action: {
                         self.settings.userDefaults.set(self.settings.email, forKey: "Email")
                         self.settings.userDefaults.set(self.settings.password, forKey: "Password")
-                    }, label: {Text("Sign up").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(self.settings.enableButton ?Color(.green):Color(.gray)).cornerRadius(geometry.size.width/self.buttonWidth).padding(.top,self.paddingButton).disabled(self.settings.enableButton)
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {Text("Sign up").fontWeight(.bold).foregroundColor(.white).frame(width:geometry.size.width/self.errorPadding, height:geometry.size.height/self.buttonHeight)}).background(self.settings.enableButton ?Color(.gray):Color(.green)).cornerRadius(geometry.size.width/self.buttonWidth).padding(.top,self.paddingButton).disabled(self.settings.enableButton)
                     Spacer()
                 }.navigationBarTitle("Registration")
                  

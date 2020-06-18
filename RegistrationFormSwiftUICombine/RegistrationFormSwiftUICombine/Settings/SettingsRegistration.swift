@@ -11,6 +11,7 @@ import Combine
 
 class SettingsRegistration:ObservableObject{
     
+    
     var userDefaults = UserDefaults.standard
     
     @Published var userName:String = ""
@@ -21,21 +22,21 @@ class SettingsRegistration:ObservableObject{
     var errorPassword:String = ""
     @Published var confirmPassword:String = ""
     var errorConfirmPassword:String = ""
-    @Published var enableButton = true
+    @Published var enableButton = false
     
     var anyCancellable = Set<AnyCancellable>()
     
     init(){
         ErrorUserName.receive(on: RunLoop.main)
             .map{valid in
-                valid ? "incorect user name" : ""
+                valid ? "Incorect user name" : ""
         }
         .assign(to: \.errorUserName, on: self)
         .store(in: &anyCancellable)
         
         ErrorEmail.receive(on: RunLoop.main)
             .map{valid in
-                valid ? "Error email":""
+                valid ? "Error incorect email":""
         }
         .assign(to: \.errorEmail, on: self)
         .store(in: &anyCancellable)
@@ -99,7 +100,7 @@ class SettingsRegistration:ObservableObject{
     private var EnableButton:AnyPublisher<Bool,Never>{
         Publishers.CombineLatest4(ErrorUserName, ErrorEmail, ErrorPassword, ErrorConfirmPassword)
             .map{errorName, errorMail, errorPass, errorConfirmPass in
-                errorName||errorMail||errorPass||errorConfirmPass == true
+                errorName||errorMail||errorPass||errorConfirmPass == true || self.userName == "" || self.email == "" || self.password == "" || self.confirmPassword == ""
         }
         .eraseToAnyPublisher()
     }
